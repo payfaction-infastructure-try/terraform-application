@@ -11,7 +11,7 @@ resource "aws_ecs_service" "app_ecs_service" {
   }
 
   load_balancer {
-    target_group_arn = var.SHOULD_USE_DEFAULT_TARGET_GROUP ? local.lb_default_target_group.arn : aws_lb_target_group.app_tg[0].id
+    target_group_arn = var.SHOULD_USE_DEFAULT_TARGET_GROUP ? local.lb_default_target_group.arn : aws_lb_target_group.app_tg[0].arn
     container_name   = "${local.aws_ecs_service_name}"
     container_port   = 80
   }
