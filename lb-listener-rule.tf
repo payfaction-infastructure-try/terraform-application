@@ -5,18 +5,18 @@ resource "aws_lb_listener_rule" "app_listener_rule" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.app_tg.arn
+    target_group_arn = aws_lb_target_group.app_tg[0].arn
   }
 
   condition {
     dynamic "host_header" {
-      for_each = { for i in LISTENER_RULE_CONDITIONS.service_alb_rules : i.field => i if i.field == "host-header" }
+      for_each = { for i in var.LISTENER_RULE_CONDITIONS : i.field => i if i.field == "host-header" }
       content {
         values = [host_header.value.value]
       }
     }
     dynamic "path_pattern" {
-      for_each = { for i in LISTENER_RULE_CONDITIONS.service_alb_rules : i.field => i if i.field == "path-pattern" }
+      for_each = { for i in var.LISTENER_RULE_CONDITIONS : i.field => i if i.field == "path-pattern" }
       content {
         values = [path_pattern.value.value]
       }
