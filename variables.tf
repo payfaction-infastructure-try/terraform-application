@@ -57,7 +57,7 @@ variable "SHOULD_USE_DEFAULT_TARGET_GROUP" {
 variable "LISTENER_RULE_CONDITIONS" {
   description = "Should a new listener be created"
 
-  type        = list(map({
+  type        = list(object({
     field  = string
     values = list(string)
   }))
