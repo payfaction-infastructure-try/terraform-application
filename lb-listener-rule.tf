@@ -1,7 +1,7 @@
 resource "aws_lb_listener_rule" "app_listener_rule" {
   count        = var.SHOULD_USE_DEFAULT_TARGET_GROUP ? 0 : 1
 
-  listener_arn = locals.lb_listener.arn
+  listener_arn = local.lb_listener.arn
 
   action {
     type             = "forward"
